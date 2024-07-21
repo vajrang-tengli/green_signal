@@ -23,6 +23,7 @@ function fetchDataAndPlot(variable) {
             labels.push(new Date(key).toLocaleString());
             values.push(data[key]);
         }
+        console.log(`Data for ${variable}:`, labels, values);
         plotGraph(labels, values, variable);
     });
 }
@@ -61,17 +62,17 @@ function plotGraph(labels, values, variable) {
 // Call fetchDataAndPlot with appropriate variable based on the page
 document.addEventListener('DOMContentLoaded', () => {
     const path = window.location.pathname;
-    if (path.includes('variable1')) {
-        fetchDataAndPlot('variable1');
-    } else if (path.includes('variable2')) {
+    if (path.includes('s1')) {
+        fetchDataAndPlot('s1');
+    } else if (path.includes('s2')) {
         fetchDataAndPlot('variable2');
-    } else if (path.includes('variable3')) {
-        fetchDataAndPlot('variable3');
-    } else if (path.includes('variable4')) {
-        fetchDataAndPlot('variable4');
+    } else if (path.includes('s3')) {
+        fetchDataAndPlot('s3');
+    } else if (path.includes('s4')) {
+        fetchDataAndPlot('s4');
     } else {
         // For combined graph
-        const variables = ['variable1', 'variable2', 'variable3', 'variable4'];
+        const variables = ['s1', 's2', 's3', 's4'];
         const datasets = [];
         let counter = 0;
         variables.forEach(variable => {
