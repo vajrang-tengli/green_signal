@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S1 Graph</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        canvas {
+            background: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sensor s1 Data</h1>
+    <canvas id="sensorChart" width="400" height="200"></canvas>
+    
+    <script>
+        // Your Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAsM2jzcUBfs1Op60hZS0RbcGxzVXzhT6E",
+            authDomain: "mini-1bdfc.firebaseapp.com",
+            databaseURL: "https://mini-1bdfc-default-rtdb.firebaseio.com",
+            projectId: "mini-1bdfc",
+            storageBucket: "mini-1bdfc.appspot.com",
+            messagingSenderId: "221002077061",
+            appId: "1:221002077061:web:9911ece47b674f3aed2aec",
+            measurementId: "G-7G77GXBE6H"
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        // Fetch sensor data from Firebase
+        database.ref('sensorData/s1').once('value').then((snapshot) => {
+            const sensorData = snapshot.val();
+            const labels = [];
+            const data = [];
+
+            for (const key in sensorData) {
+                if (key !== "time") {
+                    const timestamp = sensorData.time[key];
+                    const date = new Date(timestamp * 1000);
+                    labels.push(date.toISOString().slice(0, 19).replace('T', ' '));
+                    data.push(sensorData[key]);
+                }
+            }
+
+            const ctx = document.getElementById('sensorChart').getContext('2d');
+            const sensorChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Sensor s1 Data',
+                        data: data,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            type: 'time',
+                            time: {
+                                unit: 'second'
+                            },
+                            title: {
+                                display: true,
+                                text: 'Timestamp'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Sensor Value'
+                            }
+                        }
+                    }
+                }
+            });
+        }).catch((error) => {
+            console.error("Error fetching data: ", error);
+        });
+    </script>
+</body>
+</html>
