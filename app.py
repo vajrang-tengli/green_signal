@@ -7,7 +7,7 @@ from firebase_admin import credentials, db
 app = Flask(__name__)
 
 # Initialize Firebase Admin SDK
-cred = credentials.Certificate("path/to/your/firebase_config.json")
+cred = credentials.Certificate("mini-1bdfc-firebase-adminsdk-crl4f-23afa51b38.json")
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://mini-1bdfc-default-rtdb.firebaseio.com/'
 })
