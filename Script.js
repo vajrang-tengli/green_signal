@@ -1,12 +1,13 @@
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_AUTH_DOMAIN",
-    databaseURL: "YOUR_DATABASE_URL",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_STORAGE_BUCKET",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyAsM2jzcUBfs1Op60hZS0RbcGxzVXzhT6E",
+  authDomain: "mini-1bdfc.firebaseapp.com",
+  databaseURL: "https://mini-1bdfc-default-rtdb.firebaseio.com",
+  projectId: "mini-1bdfc",
+  storageBucket: "mini-1bdfc.appspot.com",
+  messagingSenderId: "221002077061",
+  appId: "1:221002077061:web:9911ece47b674f3aed2aec",
+  measurementId: "G-7G77GXBE6H"
 };
 
 // Initialize Firebase
