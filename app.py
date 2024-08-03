@@ -4,7 +4,7 @@ import pandas as pd
 import plotly.express as px
 
 # Initialize the Firebase Admin SDK
-cred = credentials.Certificate("mini-1bdfc-firebase-adminsdk-crl4f-c2349c1071.json")
+cred = credentials.Certificate("https://github.com/vajrang-tengli/green_signal/blob/main/mini-1bdfc-firebase-adminsdk-crl4f-c2349c1071.json")
 firebase_admin.initialize_app(cred,  {"databaseURL": "https://mini-1bdfc-default-rtdb.firebaseio.com/"})
 
 
