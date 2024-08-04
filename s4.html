@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S4</title>
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/9.9.0/firebase-app-compat.js"></script>
+    <!-- Firebase Realtime Database -->
+    <script src="https://www.gstatic.com/firebasejs/9.9.0/firebase-database-compat.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="s1.html">S1</a></li>
+                <li><a href="s2.html">S2</a></li>
+                <li><a href="s3.html">S3</a></li>
+                <li><a href="s4.html">S4</a></li>
+            </ul>
+        </nav>
+        <div class="graph">
+            <h2 class="graph-title">Sensor 4 Data</h2>
+            <canvas id="myChart" width="400" height="200"></canvas>
+        
+            <script>
+                // Your web app's Firebase configuration
+                const firebaseConfig = {
+                apiKey: "AIzaSyAsM2jzcUBfs1Op60hZS0RbcGxzVXzhT6E",
+                authDomain: "mini-1bdfc.firebaseapp.com",
+                databaseURL: "https://mini-1bdfc-default-rtdb.firebaseio.com",
+                projectId: "mini-1bdfc",
+                storageBucket: "mini-1bdfc.appspot.com",
+                messagingSenderId: "221002077061",
+                appId: "1:221002077061:web:9911ece47b674f3aed2aec",
+                measurementId: "G-7G77GXBE6H"
+                };
+
+                // Initialize Firebase
+                firebase.initializeApp(firebaseConfig);
+                const database = firebase.database();
+                const ctx = document.getElementById('myChart').getContext('2d');
+                const myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: [], // Empty labels initially
+                        datasets: [{
+                            label: 'Sensor S4 Data',
+                            data: [],
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1,
+                            fill: false
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Timestamp'
+                                }
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: 'Value'
+                                }
+                            }
+                        }
+                    }
+                });
+                // Function to fetch data from Firebase Realtime Database
+                function fetchData() {
+                    const dbRef = firebase.database().ref('/');
+                    dbRef.on('value', (snapshot) => {
+                        const data = snapshot.val();
+                        const sensorData = data.sensorData.s4;
+                        const timestamps = Object.keys(sensorData);
+                        const values = Object.values(sensorData);
+                        updateChart(timestamps, values);
+
+                    });
+                }
+
+                function updateChart(timestamps, values) {
+                    myChart.data.labels = timestamps;
+                    myChart.data.datasets[0].data = values;
+                    myChart.update();
+                }
+                fetchData();
+            </script>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,94 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+.container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 20px;
+}
+h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+.index-list {
+    list-style-type: none;
+    padding: 0;
+}
+.navbar {
+    background-color: #3498db;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000; 
+}
+.navbar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar li {
+    display: inline;
+    margin: 0 15px;
+}
+
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1em;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}
+
+.index-list li {
+    margin: 10px 0;
+}
+.index-list a {
+    text-decoration: none;
+    color: #3498db;
+    font-size: 1.2em;
+}
+
+.index-list a:hover {
+    text-decoration: underline;
+}
+
+
+.graph {
+    width: 80%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.graph-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .container {
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .graph {
+        width: 45%;
+        margin: 2.5%;
+    }
+}
