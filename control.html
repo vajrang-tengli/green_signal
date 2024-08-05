@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenSignal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>SensorData</h1>
+        <nav class="navbar">
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="s1.html">S1</a></li>
+                <li><a href="s2.html">S2</a></li>
+                <li><a href="s3.html">S3</a></li>
+                <li><a href="s4.html">S4</a></li>
+                <li><a href="control.html">Mannual-Control</a></li>
+                <li><a href="index.html" onclick="logout()">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+    <script>
+        function logout() {
+            // Clear the session
+            sessionStorage.removeItem('loggedIn');
+            // Redirect to index.html
+            window.location.href = 'index.html';
+        }
+
+        // Check if the user is logged in
+        if (sessionStorage.getItem('loggedIn') !== 'true') {
+            // If not logged in, redirect to login page
+            window.location.href = 'index.html';
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
