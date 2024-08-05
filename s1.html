@@ -13,7 +13,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/odometer-theme-default.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/justgage"></script>
+    <script src="https://cdn.jsdelivr.net/npm/raphael"></script>
     <style>
         .odometer {
             font-size: 3rem;
@@ -122,6 +123,20 @@
                     sensorDataRef.orderByKey().limitToLast(1).on('child_added', function(snapshot) {
                         var sensorData = snapshot.val();
                         document.getElementById('odometer').innerHTML = sensorData;
+                    });
+                const gauge = new JustGage({
+                    id: 'gauge',
+                    value: 0,
+                    min: 0,
+                    max: 500,
+                    title: 'Sensor s1 Value'
+                });
+                const dbRef = firebase.database().ref('/sensorData/s1');
+                    dbRef.on('value', (snapshot) => {
+                        const sensorData = snapshot.val();
+                        const latestTimestamp = Math.max(...Object.keys(sensorData));
+                        const latestValue = sensorData[latestTimestamp];
+                        gauge.refresh(latestValue);
                     });
             </script>
         </div>
